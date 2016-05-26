@@ -1,0 +1,11 @@
+- hosts: action_test
+  become: yes
+  gather_facts: no
+  vars_prompt:
+    - name: "action"
+      prompt: "run or stop"
+      private: no
+      default: "stop"
+  roles:
+    - { role: run_test, when: action == 'run' }
+    - { role: stop_test, when: action == 'stop' }

@@ -1,0 +1,8 @@
+- name: stop stress
+  command: killall stress
+  async: 5
+  poll: 0
+- name: stop fio
+  command: killall fio
+  async: 5
+  poll: 0

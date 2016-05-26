@@ -1,0 +1,4 @@
+  - name: install Lib_Util
+    yum: name={{ url }}{{ lib_util }} state=present
+  - name: install MegaCli
+    yum: name={{ url }}{{ megacli }} state=present
