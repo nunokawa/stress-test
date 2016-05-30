@@ -1,18 +1,9 @@
-- name: make bin directory
-  file: path=/root/bin state=directory owner=root group=root mode=0755
-- name: put write.fio
-  copy: src=files/write.fio dest=/root/bin/write.fio owner=root group=root mode=755
-- name: put stress.sh
-  copy: src=files/stress.sh dest=/root/bin/stress.sh owner=root group=root mode=755
-- name: kill stress
-  command: killall stress
 - name: run stress
-  command: /root/bin/stress.sh
-  async: 5
-  poll: 0
+  script: files/stress.sh
 - name: kill fio
   command: killall fio
+  ignore_errors: True
 - name: run fio
-  command: fio /root/bin/write.fio
+  command: fio -direct=1 -ioengine=libaio -rw=write -bs=1m -iodepth=16 -numjobs=16 -runtime=1d -time_based -filename=/mnt/fio -size=100g -rate=1g -name=run_test
   async: 5
   poll: 0
