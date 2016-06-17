@@ -1,0 +1,2 @@
+- mame: copy resolv.conf
+  template: src=templates/resolv.conf.j2 dest=/etc/resolv.conf mode=0644 owner=root group=root backup=yes

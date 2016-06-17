@@ -1,0 +1,4 @@
+- name: install httpd
+  yum: name=httpd state=installed
+- name: copy httpd.conf
+  template: src=templates/httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf mode=0644 owner=root group=root backup=yes

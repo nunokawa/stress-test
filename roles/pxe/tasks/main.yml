@@ -1,0 +1,8 @@
+- name: install tftp-server
+  yum: name=tftp-server state=installed
+- name: copy tftp
+  template: src=templates/tftp.j2 dest=/etc/xinetd.d/tftp mode=0644 owner=root group=root backup=yes
+- name: install syslinux
+  yum: name=syslinux state=installed
+- name: install syslinux-tftpboot
+  yum: name=syslinux-tftpboot state=installed

@@ -1,0 +1,6 @@
+- name: install dhcpd
+  yum: name=dhcp state=installed
+- mame: copy dhcpd.conf
+  template: src=templates/dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf mode=0644 owner=root group=root backup=yes
+- mame: copy dhcpd sysconfig
+  template: src=templates/dhcpd.j2 dest=/etc/sysconfig/dhcpd mode=0644 owner=root group=root backup=yes

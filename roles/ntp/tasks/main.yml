@@ -1,0 +1,6 @@
+- name: install ntp
+  yum: name=ntp state=installed
+- name: install ntpdate
+  yum: name=ntpdate state=installed
+- mame: copy ntp.conf
+  template: src=templates/ntp.conf.j2 dest=/etc/ntp.conf mode=0644 owner=root group=root backup=yes

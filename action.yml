@@ -1,4 +1,4 @@
-- hosts: action_test
+- hosts: action
   become: yes
   gather_facts: no
   vars_prompt:
