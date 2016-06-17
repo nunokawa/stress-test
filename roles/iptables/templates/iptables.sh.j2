@@ -1,0 +1,39 @@
+#!/bin/bash
+
+ACCEPT_LIST="./iptables.allow"
+if [ ! -e $ACCEPT_LIST ]
+then
+    echo "accept list ( $ACCEPT_LIST ) not found."
+    exit 1
+fi
+
+# Initialize
+iptables -F
+iptables -t nat -F
+iptables -X
+
+# Default Rule
+iptables -P INPUT DROP
+iptables -A INPUT -m state --state ESTABLISH,RELATED -j ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+
+# Loopback
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+
+# Local
+iptables -A INPUT -i eth1 -j ACCEPT
+iptables -A OUTPUT -o eth1 -j ACCEPT
+
+# ICMP
+iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+# IP Masq
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+for ALLOW in `grep '^[^#]' $ACCEPT_LIST`
+do
+        iptables -A INPUT -s $ALLOW -j ACCEPT
+done
+iptables -A INPUT -j DROP

@@ -1,4 +1,0 @@
-- hosts: pxe_server
-  become: yes
-  roles:
-    - iptables

@@ -1,0 +1,2 @@
+- mame: copy sysctl.conf
+  template: src=templates/sysctl.conf.j2 dest=/etc/sysctl.conf mode=0644 owner=root group=root backup=yes

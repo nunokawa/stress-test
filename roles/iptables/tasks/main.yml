@@ -1,0 +1,8 @@
+- name: copy iptables
+  template: src=templates/iptables.j2 dest=/etc/sysconfig/iptables owner=root group=root mode=0600 backup=yes
+- name: create target directory
+  file: path=/root/bin state=directory mode=0755
+- name: copy iptables.sh
+  template: src=templates/iptables.sh.j2 dest=/root/bin/iptables.sh owner=root group=root mode=0755 backup=yes
+- name: copy iptables.allow
+  template: src=templates/iptables.allow.j2 dest=/root/bin/iptables.allow owner=root group=root mode=0644 backup=yes

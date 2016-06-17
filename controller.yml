@@ -1,0 +1,12 @@
+- hosts: 127.0.0.1
+  connection: local
+#- hosts: controller
+  become: yes
+  roles:
+    - iptables
+    - ntp
+    - resolver
+    - sysctl
+    - dhcpd
+    - pxe
+    - httpd
